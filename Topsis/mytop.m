@@ -1,0 +1,9 @@
+function [out]=mytop(in)
+a=sqrt(sum(in.*in));
+b=in./a;%标准化矩阵
+w=sq(in);
+[m,n]=size(in);
+w1=repmat(w,m,1);%权重矩阵
+d1=sqrt(sum(w1.*(b-repmat(max(b),m,1)).^2,2));%得到每个样本的di+
+d2=sqrt(sum(w1.*(b-repmat(min(b),m,1)).^2,2));%得到每个样本的di-
+out=d2./(d1+d2);%计算每个样本的得分
